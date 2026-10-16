@@ -1,217 +1,1564 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#12304a">
-<title>حضور و غیاب QR ـ دوره</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14532d">
+<title>حضور غیاب دوره</title>
+
 <style>
-:root{--navy:#12304a;--teal:#0b756e;--bg:#f3f6f8;--line:#d8e1e8;--red:#b42318;--green:#067647}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Tahoma,Arial,sans-serif;color:#172b3a}
-header{background:var(--navy);color:#fff;padding:18px 16px}header h1{font-size:20px;margin:0 0 6px}header p{margin:0;font-size:12px;opacity:.9}
-main{max-width:1050px;margin:auto;padding:14px}
-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-button,.btn{border:0;border-radius:10px;padding:11px 13px;background:var(--teal);color:#fff;font:inherit;font-size:14px;cursor:pointer}
-button.secondary,.btn.secondary{background:#e3ebf0;color:#183247}
-button.danger{background:var(--red)}button:disabled{opacity:.45}
-.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:14px;box-shadow:0 2px 7px #102a3a0a}
-h2{font-size:17px;margin:0 0 12px}h3{font-size:15px;margin:14px 0 8px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-label{display:block;font-size:12px;color:#425a6b;margin-bottom:5px}
-input,select{width:100%;padding:11px;border:1px solid #bdcbd5;border-radius:9px;font:inherit;background:white;min-height:42px}
-.small{font-size:12px;color:#5a6e7d;line-height:1.7}
-.statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:8px;margin-bottom:12px}
-.stat{background:#f5f9fb;border:1px solid var(--line);border-radius:11px;padding:12px}
-.stat b{display:block;font-size:22px;color:var(--navy);margin-bottom:3px}.stat span{font-size:12px;color:#506675}
-.status{padding:10px;border-radius:9px;background:#edf5f8;margin-top:10px;min-height:42px;line-height:1.6}
-.status.good{background:#ecfdf3;color:#05603a}.status.bad{background:#fef3f2;color:#912018}
-#video{width:100%;max-height:42vh;background:#111;border-radius:12px;display:none;object-fit:cover}
-table{width:100%;border-collapse:collapse;font-size:12px}th,td{border-bottom:1px solid #e2e8ed;padding:9px 7px;text-align:right;white-space:nowrap}th{background:#f5f8fa}
-.tablewrap{overflow:auto;max-height:360px}.hidden{display:none!important}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.pill{display:inline-block;padding:3px 8px;border-radius:20px;background:#e8f5f1;color:#08695e;font-size:11px}
-footer{text-align:center;color:#6b7f8d;font-size:11px;padding:12px}
-@media(max-width:500px){main{padding:9px}.panel{padding:12px}button{flex:1}header h1{font-size:18px}}
+:root {
+  --green: #166534;
+  --green-dark: #14532d;
+  --bg: #f3f6f4;
+  --border: #dbe4dc;
+  --text: #17251b;
+  --red: #b91c1c;
+  --orange: #b45309;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 14px;
+}
+
+header {
+  background: linear-gradient(135deg, #14532d, #15803d);
+  color: white;
+  padding: 22px 16px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 24px;
+  margin: 0 0 8px;
+}
+
+header p {
+  margin: 0;
+  opacity: .9;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 14px;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 14px;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 9px;
+  padding: 10px 13px;
+  background: var(--green);
+  color: white;
+}
+
+button:hover { filter: brightness(.94); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+.tab {
+  flex: 1 1 110px;
+  background: white;
+  color: var(--green-dark);
+  border: 1px solid var(--border);
+}
+
+.tab.active {
+  background: var(--green);
+  color: white;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px #00000005;
+}
+
+h2 {
+  font-size: 18px;
+  margin: 0 0 14px;
+  color: var(--green-dark);
+}
+
+h3 {
+  font-size: 15px;
+  margin: 14px 0 8px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #cbd5ce;
+  border-radius: 8px;
+  background: white;
+  color: #17251b;
+  min-width: 0;
+}
+
+input:focus, select:focus {
+  outline: 2px solid #86efac;
+  border-color: var(--green);
+}
+
+.field { margin-bottom: 12px; }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.secondary {
+  background: #e8f2eb;
+  color: var(--green-dark);
+}
+
+.danger { background: var(--red); }
+.warning { background: var(--orange); }
+
+.hidden { display: none !important; }
+
+.note {
+  padding: 11px;
+  border-radius: 8px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  line-height: 1.9;
+  margin: 10px 0;
+}
+
+.warning-note {
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.stat {
+  border-radius: 12px;
+  background: white;
+  border: 1px solid var(--border);
+  padding: 15px 10px;
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-size: 24px;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: right;
+  white-space: nowrap;
+}
+
+th {
+  background: #f0fdf4;
+  color: var(--green-dark);
+}
+
+.small { font-size: 12px; color: #647067; }
+.status-present { color: #15803d; font-weight: bold; }
+.status-absent { color: #b91c1c; font-weight: bold; }
+.status-late { color: #b45309; font-weight: bold; }
+
+#reader {
+  width: 100%;
+  max-width: 500px;
+  margin: 12px auto;
+}
+
+#reader video {
+  border-radius: 12px;
+}
+
+.result {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-top: 12px;
+  line-height: 2;
+}
+
+footer {
+  text-align: center;
+  color: #647067;
+  padding: 20px;
+  font-size: 12px;
+}
+
+@media (max-width: 520px) {
+  header h1 { font-size: 21px; }
+  .container { padding: 9px; }
+  .card { padding: 12px; }
+  button { padding: 11px; }
+}
 </style>
 </head>
+
 <body>
-<header><h1>سامانه آفلاین حضور و غیاب QR</h1><p>نسخه اولیه برای دوره سه‌روزه ـ ۱۲ نوبت ـ ذخیره روی همین دستگاه</p></header>
-<main>
-<nav>
-<button data-tab="scan">اسکن و حضور</button>
-<button class="secondary" data-tab="people">شرکت‌کنندگان</button>
-<button class="secondary" data-tab="reports">گزارش و خروجی</button>
-<button class="secondary" data-tab="backup">پشتیبان‌گیری</button>
-</nav>
 
-<section id="scan" class="tab">
-<div class="panel">
-<h2>نوبت جاری</h2>
-<div class="grid">
-<div><label>روز</label><select id="day"><option value="1">روز اول</option><option value="2">روز دوم</option><option value="3">روز سوم</option></select></div>
-<div><label>کلاس</label><select id="session"><option value="1">کلاس اول</option><option value="2">کلاس دوم</option><option value="3">کلاس سوم</option><option value="4">کلاس چهارم</option></select></div>
-</div>
-<p class="small">قبل از شروع اسکن، روز و کلاس را بررسی کنید. حضور هر فرد برای هر نوبت فقط یک بار ثبت می‌شود.</p>
-<div class="statrow"><div class="stat"><b id="sessionCount">0</b><span>حاضر در این نوبت</span></div><div class="stat"><b id="totalPeople">0</b><span>کل شرکت‌کنندگان</span></div><div class="stat"><b id="todayCount">0</b><span>ثبت‌های امروز انتخاب‌شده</span></div></div>
-<div class="actions"><button id="startCamera">فعال‌کردن دوربین و اسکن</button><button id="stopCamera" class="secondary" disabled>توقف دوربین</button></div>
-<video id="video" playsinline muted></video>
-<div id="scanStatus" class="status">برای شروع، روز و کلاس را انتخاب کنید و دوربین را فعال کنید.</div>
-<div class="grid" style="margin-top:12px">
-<div><label>ثبت دستی کد QR / کد ملی</label><input id="manualCode" inputmode="numeric" placeholder="کد را وارد کنید"></div>
-<div style="align-self:end"><button id="manualSubmit" style="width:100%">ثبت حضور</button></div>
-</div>
-<p class="small">اگر دوربین در حالت فایل محلی اجازه اجرا نداد، از ثبت دستی استفاده کنید یا فایل را روی یک وب‌سرور محلی/HTTPS اجرا کنید. مرورگرهای مختلف در دسترسی دوربین از فایل محلی رفتار یکسانی ندارند.</p>
-</div>
-<div class="panel"><h2>آخرین ثبت‌ها</h2><div class="tablewrap"><table><thead><tr><th>نام</th><th>شناسه</th><th>زمان</th><th>وضعیت</th></tr></thead><tbody id="recentRows"></tbody></table></div></div>
-</section>
+<header>
+  <h1>حضور غیاب دوره</h1>
+  <p>سامانه ثبت حضور، مدیریت جلسات و محاسبه تأخیر دانشجویان</p>
+</header>
 
-<section id="people" class="tab hidden">
-<div class="panel">
-<h2>افزودن شرکت‌کننده</h2>
-<div class="grid">
-<div><label>نام و نام خانوادگی *</label><input id="pName" placeholder="مثلاً علی رضایی"></div>
-<div><label>کد ملی یا شناسه درج‌شده در QR *</label><input id="pCode" inputmode="numeric" placeholder="کد یکتا"></div>
-<div><label>شماره دانشجویی (اختیاری)</label><input id="pStudent" placeholder="شماره دانشجویی"></div>
-</div>
-<div class="actions"><button id="addPerson">افزودن فرد</button><button id="clearPerson" class="secondary">پاک‌کردن فرم</button></div>
-<div id="peopleStatus" class="status">فهرست روی همین دستگاه ذخیره می‌شود.</div>
-</div>
-<div class="panel">
-<h2>ورود گروهی از CSV</h2>
-<p class="small">فایل CSV با ستون‌های «نام,کد,شماره_دانشجویی» آماده کنید. ردیف اول می‌تواند عنوان ستون‌ها باشد. برای سازگاری بهتر، فایل را با UTF-8 ذخیره کنید. می‌توانید از اکسل خروجی CSV بگیرید.</p>
-<input type="file" id="csvFile" accept=".csv,text/csv">
-<div class="actions"><button id="importCsv">واردکردن فایل انتخاب‌شده</button><button id="downloadTemplate" class="secondary">دریافت قالب CSV</button></div>
-</div>
-<div class="panel">
-<h2>فهرست شرکت‌کنندگان (<span id="peopleCount">0</span>)</h2>
-<div class="grid"><div><label>جست‌وجو</label><input id="peopleSearch" placeholder="نام یا کد"></div></div>
-<div class="tablewrap"><table><thead><tr><th>نام</th><th>کد</th><th>شماره دانشجویی</th><th>عملیات</th></tr></thead><tbody id="peopleRows"></tbody></table></div>
-</div>
-</section>
+<div class="container">
 
-<section id="reports" class="tab hidden">
-<div class="panel">
-<h2>گزارش حضور و غیاب</h2>
-<p class="small">گزارش کلی شامل ۱۲ نوبت است. خروجی CSV با UTF-8 و جداکننده استاندارد تهیه می‌شود و در Excel قابل بازشدن است.</p>
-<div class="statrow"><div class="stat"><b id="reportPeople">0</b><span>شرکت‌کننده</span></div><div class="stat"><b id="reportMarks">0</b><span>ثبت حضور</span></div><div class="stat"><b id="reportPct">0%</b><span>میانگین حضور</span></div></div>
-<div class="actions"><button id="exportSummary">دانلود گزارش کلی CSV</button><button id="exportLog" class="secondary">دانلود ریز ثبت‌ها CSV</button></div>
-<h3>پیش‌نمایش گزارش کلی</h3><div class="tablewrap"><table><thead id="reportHead"></thead><tbody id="reportRows"></tbody></table></div>
-</div>
-</section>
+  <div class="note warning-note">
+    <strong>توجه:</strong>
+    اطلاعات این برنامه روی همین گوشی و همین مرورگر ذخیره می‌شود.
+    پاک‌کردن اطلاعات مرورگر ممکن است اطلاعات برنامه را حذف کند.
+    مرتب از قسمت پشتیبان‌گیری، نسخه پشتیبان بگیرید.
+  </div>
 
-<section id="backup" class="tab hidden">
-<div class="panel">
-<h2>پشتیبان‌گیری و انتقال</h2>
-<p class="small">اطلاعات این نسخه فقط در حافظه مرورگر همین دستگاه ذخیره می‌شود. پاک‌کردن داده‌های مرورگر یا عوض‌کردن گوشی ممکن است اطلاعات را حذف کند؛ حتماً مرتب پشتیبان بگیرید.</p>
-<div class="actions"><button id="exportBackup">دانلود پشتیبان کامل JSON</button><button id="importBackupBtn" class="secondary">بازیابی از پشتیبان JSON</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div>
-<div class="status">برای انتقال به گوشی دیگر، پشتیبان JSON را دانلود و در دستگاه مقصد بازیابی کنید. اطلاعات هم‌زمان بین چند دستگاه همگام‌سازی نمی‌شود.</div>
+  <div class="tabs">
+    <button class="tab active" data-page="attendance">حضور و غیاب</button>
+    <button class="tab" data-page="students">مدیریت دانشجویان</button>
+    <button class="tab" data-page="sessions">مدیریت کلاس‌ها</button>
+    <button class="tab" data-page="reports">گزارش‌ها</button>
+    <button class="tab" data-page="backup">پشتیبان‌گیری</button>
+  </div>
+
+  <!-- حضور و غیاب -->
+  <section id="page-attendance" class="page">
+
+    <div class="card">
+      <h2>انتخاب روز و کلاس</h2>
+
+      <div class="grid">
+        <div class="field">
+          <label for="attendanceDate">تاریخ جلسه</label>
+          <input type="date" id="attendanceDate">
+        </div>
+
+        <div class="field">
+          <label for="attendanceClass">شماره کلاس</label>
+          <select id="attendanceClass">
+            <option value="1">کلاس اول</option>
+            <option value="2">کلاس دوم</option>
+            <option value="3">کلاس سوم</option>
+            <option value="4">کلاس چهارم</option>
+            <option value="5">کلاس پنجم</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="arrivalTime">ساعت واقعی ورود دانشجو</label>
+          <input type="time" id="arrivalTime">
+        </div>
+      </div>
+
+      <div class="note" id="sessionInfo"></div>
+
+      <div class="actions">
+        <button id="startScanBtn">شروع اسکن QR</button>
+        <button id="stopScanBtn" class="secondary">توقف اسکن</button>
+      </div>
+
+      <div id="reader"></div>
+
+      <div class="small">
+        دوربین باید در تنظیمات مرورگر مجاز باشد. سایت GitHub Pages را با HTTPS باز کنید.
+        اگر دوربین باز نشد، مجوز دوربین مرورگر را بررسی کنید.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>ثبت دستی حضور</h2>
+
+      <div class="grid">
+        <div class="field">
+          <label for="manualNationalId">کد ملی دانشجو</label>
+          <input id="manualNationalId" inputmode="numeric"
+                 maxlength="10" placeholder="کد ملی ۱۰ رقمی">
+        </div>
+
+        <div class="field">
+          <label for="manualArrivalTime">ساعت واقعی ورود</label>
+          <input id="manualArrivalTime" type="time">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="manualAttendanceBtn">ثبت حضور دستی</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>وضعیت کلاس انتخاب‌شده</h2>
+
+      <div class="stats">
+        <div class="stat"><strong id="totalStudents">۰</strong>کل دانشجویان</div>
+        <div class="stat"><strong id="presentStudents">۰</strong>حاضر</div>
+        <div class="stat"><strong id="absentStudents">۰</strong>غایب</div>
+        <div class="stat"><strong id="lateStudents">۰</strong>دارای تأخیر</div>
+      </div>
+
+      <div class="field">
+        <label for="attendanceSearch">جست‌وجوی دانشجو</label>
+        <input id="attendanceSearch" placeholder="نام یا کد ملی...">
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>نام و نام خانوادگی</th>
+              <th>کد ملی</th>
+              <th>وضعیت</th>
+              <th>ورود واقعی</th>
+              <th>تأخیر</th>
+              <th>عملیات</th>
+            </tr>
+          </thead>
+          <tbody id="attendanceTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- دانشجویان -->
+  <section id="page-students" class="page hidden">
+
+    <div class="card">
+      <h2 id="studentFormTitle">افزودن دانشجو</h2>
+
+      <form id="studentForm">
+        <input type="hidden" id="editStudentId">
+
+        <div class="grid">
+          <div class="field">
+            <label for="firstName">نام</label>
+            <input id="firstName" required>
+          </div>
+
+          <div class="field">
+            <label for="lastName">نام خانوادگی</label>
+            <input id="lastName" required>
+          </div>
+
+          <div class="field">
+            <label for="nationalId">کد ملی</label>
+            <input id="nationalId" inputmode="numeric"
+                   maxlength="10" required>
+          </div>
+
+          <div class="field">
+            <label for="studentCode">شماره دانشجویی</label>
+            <input id="studentCode">
+          </div>
+
+          <div class="field">
+            <label for="major">رشته تحصیلی</label>
+            <input id="major">
+          </div>
+
+          <div class="field">
+            <label for="phone">شماره تلفن</label>
+            <input id="phone" inputmode="tel">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit">ذخیره دانشجو</button>
+          <button type="button" id="cancelEditBtn" class="secondary hidden">
+            لغو ویرایش
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>فهرست دانشجویان</h2>
+
+      <div class="field">
+        <label for="studentSearch">جست‌وجو</label>
+        <input id="studentSearch" placeholder="نام، کد ملی یا شماره دانشجویی...">
+      </div>
+
+      <div class="actions">
+        <button id="exportStudentsBtn" class="secondary">خروجی دانشجویان CSV</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>نام و نام خانوادگی</th>
+              <th>کد ملی</th>
+              <th>شماره دانشجویی</th>
+              <th>رشته</th>
+              <th>تلفن</th>
+              <th>عملیات</th>
+            </tr>
+          </thead>
+          <tbody id="studentsTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- کلاس‌ها -->
+  <section id="page-sessions" class="page hidden">
+
+    <div class="card">
+      <h2>تنظیم ساعت شروع کلاس‌ها</h2>
+
+      <div class="note">
+        تأخیر از اختلاف ساعت واقعی ورود دانشجو با ساعت شروع کلاس محاسبه می‌شود.
+        ساعت شروع هر کلاس را می‌توانی متناسب با برنامه همان روز تغییر بدهی.
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="start1">کلاس اول</label>
+          <input type="time" id="start1" value="08:00">
+        </div>
+
+        <div class="field">
+          <label for="start2">کلاس دوم</label>
+          <input type="time" id="start2" value="10:00">
+        </div>
+
+        <div class="field">
+          <label for="start3">کلاس سوم</label>
+          <input type="time" id="start3" value="14:00">
+        </div>
+
+        <div class="field">
+          <label for="start4">کلاس چهارم</label>
+          <input type="time" id="start4" value="16:00">
+        </div>
+
+        <div class="field">
+          <label for="start5">کلاس پنجم</label>
+          <input type="time" id="start5" value="20:00">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="saveTimesBtn">ذخیره ساعت‌ها</button>
+      </div>
+
+      <p class="small">
+        این ساعت‌ها تنظیم پیش‌فرض دستگاه هستند. برای روزی با برنامه متفاوت،
+        پیش از ثبت حضور ساعت شروع همان کلاس را تغییر بده.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- گزارش‌ها -->
+  <section id="page-reports" class="page hidden">
+
+    <div class="card">
+      <h2>گزارش حضور و تأخیر</h2>
+
+      <div class="grid">
+        <div class="field">
+          <label for="reportDate">تاریخ</label>
+          <input type="date" id="reportDate">
+        </div>
+
+        <div class="field">
+          <label for="reportClass">کلاس</label>
+          <select id="reportClass">
+            <option value="all">همه کلاس‌ها</option>
+            <option value="1">کلاس اول</option>
+            <option value="2">کلاس دوم</option>
+            <option value="3">کلاس سوم</option>
+            <option value="4">کلاس چهارم</option>
+            <option value="5">کلاس پنجم</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="refreshReportsBtn">نمایش گزارش</button>
+        <button id="exportAttendanceBtn" class="secondary">خروجی گزارش CSV</button>
+      </div>
+
+      <div class="table-wrap" style="margin-top:14px">
+        <table>
+          <thead>
+            <tr>
+              <th>تاریخ</th>
+              <th>کلاس</th>
+              <th>نام دانشجو</th>
+              <th>کد ملی</th>
+              <th>وضعیت</th>
+              <th>ساعت شروع</th>
+              <th>ساعت ورود</th>
+              <th>تأخیر (دقیقه)</th>
+            </tr>
+          </thead>
+          <tbody id="reportsTable"></tbody>
+        </table>
+      </div>
+
+      <h3>مجموع تأخیر دانشجویان در دوره</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>نام دانشجو</th>
+              <th>کد ملی</th>
+              <th>تعداد حضور ثبت‌شده</th>
+              <th>مجموع تأخیر (دقیقه)</th>
+            </tr>
+          </thead>
+          <tbody id="totalsTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- پشتیبان -->
+  <section id="page-backup" class="page hidden">
+
+    <div class="card">
+      <h2>پشتیبان‌گیری و بازیابی اطلاعات</h2>
+
+      <div class="note warning-note">
+        اطلاعات دانشجویان روی دستگاه ذخیره می‌شود و به‌صورت خودکار بین گوشی‌ها
+        منتقل نمی‌شود. فایل پشتیبان شامل اطلاعات شخصی دانشجویان و سوابق حضور است؛
+        آن را در اختیار افراد غیرمجاز قرار نده.
+      </div>
+
+      <div class="actions">
+        <button id="backupBtn">دریافت نسخه پشتیبان JSON</button>
+        <button id="restoreBtn" class="secondary">بازیابی نسخه پشتیبان</button>
+        <input type="file" id="restoreFile" accept=".json,application/json"
+               class="hidden">
+      </div>
+
+      <hr style="border:0;border-top:1px solid #e5e7eb;margin:20px 0">
+
+      <h3>پاک‌کردن اطلاعات دستگاه</h3>
+      <p>این کار همه دانشجویان، جلسات و سوابق حضور را از این مرورگر حذف می‌کند.</p>
+      <button id="clearDataBtn" class="danger">حذف همه اطلاعات</button>
+    </div>
+
+  </section>
+
 </div>
-<div class="panel"><h2>حذف اطلاعات</h2><p class="small">این کار همه شرکت‌کنندگان و ثبت‌های حضور را از همین دستگاه پاک می‌کند.</p><button id="wipe" class="danger">حذف همه اطلاعات</button></div>
-</section>
-<footer>نسخه اولیه آفلاین • اطلاعات روی دستگاه ذخیره می‌شود • در پایان هر روز پشتیبان بگیرید</footer>
-</main>
+
+<footer>
+  حضور غیاب دوره | ذخیره‌سازی محلی روی دستگاه
+</footer>
+
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
 <script>
-(function(){
-const $=id=>document.getElementById(id);
-const KEY='qrAttendanceOfflineV1';
-let state={people:[],marks:[]};
-try{const saved=localStorage.getItem(KEY);if(saved)state=JSON.parse(saved)}catch(e){}
-let stream=null, detector=null, scanLoop=null, lastCode='', lastAt=0;
-function save(){localStorage.setItem(KEY,JSON.stringify(state));renderAll()}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function sessionKey(){return `${$('day').value}-${$('session').value}`}
-function sessionLabel(k){let [d,s]=k.split('-');return `روز ${d}، کلاس ${s}`}
-function stamp(){return new Date().toLocaleString('fa-IR',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})}
-function mark(code){
- code=String(code||'').trim();
- if(!code){status('کدی خوانده نشد.',false);return}
- const person=state.people.find(p=>String(p.code).trim()===code);
- if(!person){status(`این کد در فهرست نیست: ${code}`,false);return}
- const sk=sessionKey();
- if(state.marks.some(m=>m.code===person.code&&m.session===sk)){status(`حضور ${person.name} قبلاً در ${sessionLabel(sk)} ثبت شده است.`,false);return}
- const m={code:person.code,name:person.name,session:sk,day:Number($('day').value),classNo:Number($('session').value),time:stamp(),iso:new Date().toISOString()};
- state.marks.push(m);save();status(`حضور با موفقیت ثبت شد: ${person.name} — ${sessionLabel(sk)} — ${m.time}`,true);
- $('manualCode').value='';
-}
-function status(msg,good){$('scanStatus').textContent=msg;$('scanStatus').className='status '+(good?'good':'bad')}
-function addPerson(name,code,student=''){
- name=String(name||'').trim();code=String(code||'').trim();student=String(student||'').trim();
- if(!name||!code){$('peopleStatus').textContent='نام و کد الزامی است.';return false}
- if(state.people.some(p=>p.code===code)){$('peopleStatus').textContent='این کد قبلاً ثبت شده است: '+code;return false}
- state.people.push({name,code,student});save();$('peopleStatus').textContent='شرکت‌کننده اضافه شد: '+name;return true;
-}
-function download(filename,content,type='text/csv;charset=utf-8;'){
- const blob=new Blob(['\ufeff',content],{type});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)
-}
-function csv(rows){return rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n')}
-function renderPeople(){
- const q=$('peopleSearch').value.toLowerCase().trim();
- const list=state.people.filter(p=>!q||(p.name+' '+p.code+' '+p.student).toLowerCase().includes(q));
- $('peopleRows').innerHTML=list.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.code)}</td><td>${esc(p.student)}</td><td><button class="danger" data-del="${esc(p.code)}">حذف</button></td></tr>`).join('');
- $('peopleCount').textContent=state.people.length;$('totalPeople').textContent=state.people.length;$('reportPeople').textContent=state.people.length;
-}
-function renderRecent(){
- const sk=sessionKey(), arr=state.marks.filter(m=>m.session===sk).slice(-10).reverse();
- $('recentRows').innerHTML=arr.map(m=>`<tr><td>${esc(m.name)}</td><td>${esc(m.code)}</td><td>${esc(m.time)}</td><td><span class="pill">حاضر</span></td></tr>`).join('');
- $('sessionCount').textContent=state.marks.filter(m=>m.session===sk).length;
- $('todayCount').textContent=state.marks.filter(m=>m.day===Number($('day').value)).length;
-}
-function renderReport(){
- const sessions=[];for(let d=1;d<=3;d++)for(let c=1;c<=4;c++)sessions.push(`${d}-${c}`);
- $('reportHead').innerHTML='<tr><th>نام</th><th>کد</th>'+sessions.map(s=>`<th>${s.replace('-','/')}</th>`).join('')+'<th>حضور</th><th>درصد</th></tr>';
- let total=0,poss=state.people.length*12;
- $('reportRows').innerHTML=state.people.map(p=>{
- let n=0;const cells=sessions.map(s=>{const yes=state.marks.some(m=>m.code===p.code&&m.session===s);if(yes)n++;return `<td>${yes?'حاضر':'غایب'}</td>`});
- total+=n;return `<tr><td>${esc(p.name)}</td><td>${esc(p.code)}</td>${cells.join('')}<td>${n}/12</td><td>${Math.round(n/12*100)}٪</td></tr>`;
- }).join('');
- $('reportMarks').textContent=state.marks.length;$('reportPct').textContent=(poss?Math.round(total/poss*100):0)+'%';
-}
-function renderAll(){renderPeople();renderRecent();renderReport()}
-document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(t=>t.classList.add('hidden'));$(b.dataset.tab).classList.remove('hidden');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('secondary',x!==b));renderAll()}));
-$('day').addEventListener('change',renderRecent);$('session').addEventListener('change',renderRecent);
-$('addPerson').onclick=()=>{if(addPerson($('pName').value,$('pCode').value,$('pStudent').value)){$('pName').value='';$('pCode').value='';$('pStudent').value=''}};
-$('clearPerson').onclick=()=>{$('pName').value='';$('pCode').value='';$('pStudent').value=''};
-$('peopleSearch').oninput=renderPeople;
-$('peopleRows').onclick=e=>{const code=e.target.dataset.del;if(!code)return;if(confirm('این فرد و ثبت‌های حضور مربوط به او حذف شود؟')){state.people=state.people.filter(p=>p.code!==code);state.marks=state.marks.filter(m=>m.code!==code);save()}};
-$('manualSubmit').onclick=()=>mark($('manualCode').value);
-$('manualCode').addEventListener('keydown',e=>{if(e.key==='Enter')mark($('manualCode').value)});
-$('downloadTemplate').onclick=()=>download('template-participants.csv',csv([['نام','کد','شماره_دانشجویی'],['علی رضایی','1001','123456'],['محمد احمدی','1002','123457']]));
-$('importCsv').onclick=async()=>{
- const f=$('csvFile').files[0];if(!f){$('peopleStatus').textContent='ابتدا فایل CSV را انتخاب کنید.';return}
- const txt=(await f.text()).replace(/^\uFEFF/,'');const lines=txt.split(/\r?\n/).filter(x=>x.trim());
- let added=0,skipped=0;
- function parseLine(line){let out=[],cur='',q=false;for(let i=0;i<line.length;i++){let c=line[i];if(c==='"'&&q&&line[i+1]==='"'){cur+='"';i++}else if(c==='"')q=!q;else if(c===','&&!q){out.push(cur);cur=''}else cur+=c}out.push(cur);return out}
- lines.forEach((line,i)=>{const a=parseLine(line);if(i===0&&/نام|name/i.test(a[0]))return;if(a.length<2){skipped++;return}if(addPersonSilent(a[0],a[1],a[2]||''))added++;else skipped++});
- save();$('peopleStatus').textContent=`ورود گروهی پایان یافت؛ ${added} نفر اضافه شد، ${skipped} ردیف رد شد.`;
-};
-function addPersonSilent(name,code,student){name=String(name||'').trim();code=String(code||'').trim();if(!name||!code||state.people.some(p=>p.code===code))return false;state.people.push({name,code,student:String(student||'').trim()});return true}
-$('exportSummary').onclick=()=>{
- const sessions=[];for(let d=1;d<=3;d++)for(let c=1;c<=4;c++)sessions.push(`${d}-${c}`);
- const rows=[['نام و نام خانوادگی','کد','شماره دانشجویی',...sessions.map(sessionLabel),'تعداد حضور','درصد حضور']];
- state.people.forEach(p=>{let n=0;const cells=sessions.map(s=>{const yes=state.marks.some(m=>m.code===p.code&&m.session===s);if(yes)n++;return yes?'حاضر':'غایب'});rows.push([p.name,p.code,p.student,...cells,n+'/12',Math.round(n/12*100)+'%'])});
- download('attendance-summary.csv',csv(rows));
-};
-$('exportLog').onclick=()=>{const rows=[['نام','کد','روز','کلاس','نوبت','زمان ثبت']];state.marks.forEach(m=>rows.push([m.name,m.code,'روز '+m.day,'کلاس '+m.classNo,sessionLabel(m.session),m.time]));download('attendance-details.csv',csv(rows))};
-$('exportBackup').onclick=()=>download('attendance-backup.json',JSON.stringify(state,null,2),'application/json;charset=utf-8');
-$('importBackupBtn').onclick=()=>$('backupFile').click();
-$('backupFile').onchange=async()=>{const f=$('backupFile').files[0];if(!f)return;try{const x=JSON.parse(await f.text());if(!Array.isArray(x.people)||!Array.isArray(x.marks))throw Error();if(confirm('اطلاعات فعلی با نسخه پشتیبان جایگزین شود؟')){state=x;save();alert('بازیابی انجام شد.')}}catch(e){alert('فایل پشتیبان معتبر نیست.')}};
-$('wipe').onclick=()=>{if(confirm('مطمئن هستید؟ همه اطلاعات این دستگاه حذف می‌شود.')){state={people:[],marks:[]};save()}};
+"use strict";
 
-async function startCamera(){
- if(!('BarcodeDetector'in window)){status('این مرورگر قابلیت اسکن داخلی QR را ندارد. از ثبت دستی کد استفاده کنید یا مرورگر Chrome به‌روز را امتحان کنید.',false);return}
- try{
- detector=new BarcodeDetector({formats:['qr_code']});
- stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
- $('video').srcObject=stream;$('video').style.display='block';await $('video').play();$('startCamera').disabled=true;$('stopCamera').disabled=false;
- status('دوربین فعال است؛ QR را روبه‌روی دوربین بگیرید.',true);
- const tick=async()=>{if(!stream)return;try{const codes=await detector.detect($('video'));if(codes.length){const val=codes[0].rawValue;const now=Date.now();if(val!==lastCode||now-lastAt>1800){lastCode=val;lastAt=now;mark(val)}}}catch(e){}scanLoop=requestAnimationFrame(tick)};
- tick();
- }catch(e){status('دسترسی به دوربین برقرار نشد. اجازه دوربین را بررسی کنید؛ در صورت بازکردن فایل محلی، ممکن است مرورگر دوربین را مسدود کند.',false)}
+/* =========================
+   ذخیره‌سازی محلی
+========================= */
+
+const STORAGE_KEY = "hozur_ghiab_dore_v1";
+
+const DEFAULT_TIMES = {
+  "1": "08:00",
+  "2": "10:00",
+  "3": "14:00",
+  "4": "16:00",
+  "5": "20:00"
+};
+
+function newDatabase() {
+  return {
+    students: [],
+    records: {},
+    times: {...DEFAULT_TIMES}
+  };
 }
-function stopCamera(){if(scanLoop)cancelAnimationFrame(scanLoop);scanLoop=null;if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}$('video').pause();$('video').srcObject=null;$('video').style.display='none';$('startCamera').disabled=false;$('stopCamera').disabled=true}
-$('startCamera').onclick=startCamera;$('stopCamera').onclick=stopCamera;
-window.addEventListener('pagehide',stopCamera);
-renderAll();
-})();
+
+function loadDatabase() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return newDatabase();
+
+    const data = JSON.parse(raw);
+
+    return {
+      students: Array.isArray(data.students) ? data.students : [],
+      records: data.records && typeof data.records === "object"
+        ? data.records : {},
+      times: {...DEFAULT_TIMES, ...(data.times || {})}
+    };
+  } catch (error) {
+    alert("خواندن اطلاعات ذخیره‌شده ناموفق بود. پیش از هر تغییری، اگر نسخه پشتیبان داری آن را بررسی کن.");
+    return newDatabase();
+  }
+}
+
+let db = loadDatabase();
+
+function saveDatabase() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+    return true;
+  } catch (error) {
+    alert("ذخیره اطلاعات ناموفق بود. احتمال دارد فضای ذخیره‌سازی مرورگر پر شده باشد.");
+    return false;
+  }
+}
+
+function normalizeDigits(value) {
+  return String(value ?? "")
+    .replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+    .replace(/\s/g, "");
+}
+
+function cleanText(value) {
+  return String(value ?? "").trim();
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[ch]);
+}
+
+function todayISO() {
+  const d = new Date();
+  return d.getFullYear() + "-" +
+    String(d.getMonth() + 1).padStart(2, "0") + "-" +
+    String(d.getDate()).padStart(2, "0");
+}
+
+function currentTime() {
+  const d = new Date();
+  return String(d.getHours()).padStart(2, "0") + ":" +
+    String(d.getMinutes()).padStart(2, "0");
+}
+
+function persianNumber(value) {
+  return String(value).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+}
+
+function className(classNo) {
+  return ["", "اول", "دوم", "سوم", "چهارم", "پنجم"][Number(classNo)] || "";
+}
+
+function getStudent(nationalId) {
+  const id = normalizeDigits(nationalId);
+  return db.students.find(s => s.nationalId === id);
+}
+
+function fullName(student) {
+  return `${student.firstName} ${student.lastName}`.trim();
+}
+
+function recordKey(date, classNo, nationalId) {
+  return `${date}|${classNo}|${nationalId}`;
+}
+
+function getRecord(date, classNo, nationalId) {
+  return db.records[recordKey(date, classNo, nationalId)] || null;
+}
+
+function getStartTime(classNo) {
+  return db.times[String(classNo)] || DEFAULT_TIMES[String(classNo)];
+}
+
+function minutesBetween(start, end) {
+  if (!start || !end) return 0;
+
+  const a = start.split(":").map(Number);
+  const b = end.split(":").map(Number);
+
+  const startMinutes = a[0] * 60 + a[1];
+  const endMinutes = b[0] * 60 + b[1];
+
+  return Math.max(0, endMinutes - startMinutes);
+}
+
+function calcLate(classNo, arrivalTime) {
+  return minutesBetween(getStartTime(classNo), arrivalTime);
+}
+
+function formatLate(minutes) {
+  return minutes > 0
+    ? persianNumber(minutes) + " دقیقه"
+    : "بدون تأخیر";
+}
+
+function allRecords() {
+  return Object.values(db.records);
+}
+
+/* =========================
+   ناوبری
+========================= */
+
+document.querySelectorAll(".tab").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+    button.classList.add("active");
+
+    document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+    document.getElementById("page-" + button.dataset.page).classList.remove("hidden");
+
+    if (button.dataset.page === "attendance") renderAttendance();
+    if (button.dataset.page === "students") renderStudents();
+    if (button.dataset.page === "reports") renderReports();
+    if (button.dataset.page === "sessions") renderTimes();
+  });
+});
+
+/* =========================
+   کلاس و تاریخ
+========================= */
+
+const dateInput = document.getElementById("attendanceDate");
+const classInput = document.getElementById("attendanceClass");
+const arrivalInput = document.getElementById("arrivalTime");
+
+dateInput.value = todayISO();
+document.getElementById("reportDate").value = todayISO();
+arrivalInput.value = currentTime();
+document.getElementById("manualArrivalTime").value = currentTime();
+
+function updateSessionInfo() {
+  const date = dateInput.value;
+  const classNo = classInput.value;
+  const start = getStartTime(classNo);
+
+  document.getElementById("sessionInfo").innerHTML =
+    `تاریخ: <strong>${escapeHTML(date || "-")}</strong><br>` +
+    `کلاس: <strong>${escapeHTML(className(classNo))}</strong><br>` +
+    `ساعت شروع: <strong>${escapeHTML(start)}</strong><br>` +
+    `ساعت ورود ثبت‌شده، ساعت واقعی ورود دانشجو است؛ نه لزوماً زمان اسکن QR.`;
+}
+
+dateInput.addEventListener("change", () => {
+  renderAttendance();
+  updateSessionInfo();
+});
+
+classInput.addEventListener("change", () => {
+  renderAttendance();
+  updateSessionInfo();
+});
+
+arrivalInput.addEventListener("focus", () => {
+  if (!arrivalInput.value) arrivalInput.value = currentTime();
+});
+
+updateSessionInfo();
+
+/* =========================
+   مدیریت دانشجویان
+========================= */
+
+const studentForm = document.getElementById("studentForm");
+
+studentForm.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const id = normalizeDigits(document.getElementById("nationalId").value);
+
+  if (!/^\d{10}$/.test(id)) {
+    alert("کد ملی باید دقیقاً ۱۰ رقم باشد.");
+    return;
+  }
+
+  const existing = getStudent(id);
+  const editId = document.getElementById("editStudentId").value;
+
+  if (existing && editId !== id) {
+    alert("این کد ملی قبلاً ثبت شده است.");
+    return;
+  }
+
+  const student = {
+    firstName: cleanText(document.getElementById("firstName").value),
+    lastName: cleanText(document.getElementById("lastName").value),
+    nationalId: id,
+    studentCode: cleanText(document.getElementById("studentCode").value),
+    major: cleanText(document.getElementById("major").value),
+    phone: cleanText(document.getElementById("phone").value)
+  };
+
+  if (!student.firstName || !student.lastName) {
+    alert("نام و نام خانوادگی الزامی است.");
+    return;
+  }
+
+  if (editId) {
+    const index = db.students.findIndex(s => s.nationalId === editId);
+
+    if (index < 0) {
+      alert("دانشجو پیدا نشد.");
+      return;
+    }
+
+    if (editId !== id) {
+      const hasRecords = allRecords().some(r => r.nationalId === editId);
+      if (hasRecords) {
+        alert("برای جلوگیری از جداشدن سوابق حضور، کد ملی دانشجویی که سابقه دارد قابل تغییر نیست.");
+        return;
+      }
+    }
+
+    db.students[index] = student;
+  } else {
+    if (existing) {
+      alert("این دانشجو قبلاً ثبت شده است.");
+      return;
+    }
+
+    db.students.push(student);
+  }
+
+  if (!saveDatabase()) return;
+
+  resetStudentForm();
+  renderStudents();
+  renderAttendance();
+  alert("اطلاعات دانشجو ذخیره شد.");
+});
+
+function resetStudentForm() {
+  studentForm.reset();
+  document.getElementById("editStudentId").value = "";
+  document.getElementById("studentFormTitle").textContent = "افزودن دانشجو";
+  document.getElementById("cancelEditBtn").classList.add("hidden");
+}
+
+document.getElementById("cancelEditBtn").addEventListener("click", resetStudentForm);
+
+function editStudent(id) {
+  const s = getStudent(id);
+  if (!s) return;
+
+  document.getElementById("editStudentId").value = s.nationalId;
+  document.getElementById("firstName").value = s.firstName;
+  document.getElementById("lastName").value = s.lastName;
+  document.getElementById("nationalId").value = s.nationalId;
+  document.getElementById("studentCode").value = s.studentCode || "";
+  document.getElementById("major").value = s.major || "";
+  document.getElementById("phone").value = s.phone || "";
+
+  document.getElementById("studentFormTitle").textContent = "ویرایش دانشجو";
+  document.getElementById("cancelEditBtn").classList.remove("hidden");
+
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+function deleteStudent(id) {
+  const s = getStudent(id);
+  if (!s) return;
+
+  if (allRecords().some(r => r.nationalId === id)) {
+    alert("این دانشجو سابقه حضور دارد؛ حذف مستقیم مجاز نیست تا سوابق حفظ شوند.");
+    return;
+  }
+
+  if (!confirm(`دانشجوی ${fullName(s)} حذف شود؟`)) return;
+
+  db.students = db.students.filter(st => st.nationalId !== id);
+  saveDatabase();
+  renderStudents();
+  renderAttendance();
+}
+
+document.getElementById("studentSearch").addEventListener("input", renderStudents);
+
+function renderStudents() {
+  const q = normalizeDigits(document.getElementById("studentSearch").value).toLowerCase();
+
+  const list = db.students.filter(s =>
+    [s.firstName, s.lastName, s.nationalId, s.studentCode, s.major, s.phone]
+      .some(v => normalizeDigits(v).toLowerCase().includes(q))
+  );
+
+  const tbody = document.getElementById("studentsTable");
+
+  tbody.innerHTML = list.map(s => `
+    <tr>
+      <td>${escapeHTML(fullName(s))}</td>
+      <td>${escapeHTML(s.nationalId)}</td>
+      <td>${escapeHTML(s.studentCode || "-")}</td>
+      <td>${escapeHTML(s.major || "-")}</td>
+      <td>${escapeHTML(s.phone || "-")}</td>
+      <td>
+        <button class="secondary" onclick="editStudent('${s.nationalId}')">ویرایش</button>
+        <button class="danger" onclick="deleteStudent('${s.nationalId}')">حذف</button>
+      </td>
+    </tr>
+  `).join("");
+
+  if (!list.length) {
+    tbody.innerHTML = `<tr><td colspan="6">دانشجویی پیدا نشد.</td></tr>`;
+  }
+}
+
+/* =========================
+   ثبت حضور و محاسبه تأخیر
+========================= */
+
+function markAttendance(nationalId, arrivalTime, source) {
+  const id = normalizeDigits(nationalId);
+  const date = dateInput.value;
+  const classNo = classInput.value;
+
+  if (!date) {
+    alert("ابتدا تاریخ جلسه را انتخاب کن.");
+    return;
+  }
+
+  if (!/^\d{10}$/.test(id)) {
+    alert("کد ملی معتبر نیست؛ باید ۱۰ رقم باشد.");
+    return;
+  }
+
+  const student = getStudent(id);
+
+  if (!student) {
+    alert("این کد ملی در فهرست دانشجویان ثبت نشده است. ابتدا دانشجو را اضافه کن.");
+    return;
+  }
+
+  const arrival = normalizeDigits(arrivalTime || "");
+
+  if (!/^\d{2}:\d{2}$/.test(arrival)) {
+    alert("ساعت واقعی ورود دانشجو را وارد کن.");
+    return;
+  }
+
+  const key = recordKey(date, classNo, id);
+  const existing = db.records[key];
+
+  if (existing) {
+    const change = confirm(
+      `حضور ${fullName(student)} قبلاً ثبت شده است.\n` +
+      `ساعت ورود فعلی: ${existing.arrivalTime}\n` +
+      `آیا می‌خواهی ساعت ورود ثبت‌شده را اصلاح کنی؟`
+    );
+
+    if (!change) return;
+
+    existing.arrivalTime = arrival;
+    existing.scannedAt = new Date().toISOString();
+    existing.source = source;
+    existing.lateMinutes = calcLate(classNo, arrival);
+  } else {
+    db.records[key] = {
+      date,
+      classNo: String(classNo),
+      nationalId: id,
+      arrivalTime: arrival,
+      scannedAt: new Date().toISOString(),
+      source,
+      lateMinutes: calcLate(classNo, arrival)
+    };
+  }
+
+  if (!saveDatabase()) return;
+
+  renderAttendance();
+
+  document.getElementById("manualNationalId").value = "";
+  document.getElementById("manualArrivalTime").value = currentTime();
+
+  const late = calcLate(classNo, arrival);
+
+  alert(
+    `حضور ثبت شد.\n` +
+    `نام: ${fullName(student)}\n` +
+    `کلاس: ${className(classNo)}\n` +
+    `ساعت ورود: ${arrival}\n` +
+    `میزان تأخیر: ${formatLate(late)}`
+  );
+}
+
+document.getElementById("manualAttendanceBtn").addEventListener("click", () => {
+  const id = document.getElementById("manualNationalId").value;
+  const arrival = document.getElementById("manualArrivalTime").value;
+  markAttendance(id, arrival, "manual");
+});
+
+function editArrival(id) {
+  const date = dateInput.value;
+  const classNo = classInput.value;
+  const rec = getRecord(date, classNo, id);
+  if (!rec) return;
+
+  const newTime = prompt("ساعت واقعی ورود را وارد کن (مثلاً 08:12):", rec.arrivalTime);
+  if (newTime === null) return;
+
+  const time = normalizeDigits(newTime);
+
+  if (!/^\d{2}:\d{2}$/.test(time)) {
+    alert("فرمت ساعت درست نیست. نمونه: 08:12");
+    return;
+  }
+
+  rec.arrivalTime = time;
+  rec.lateMinutes = calcLate(classNo, time);
+  rec.scannedAt = new Date().toISOString();
+
+  saveDatabase();
+  renderAttendance();
+}
+
+function removeAttendance(id) {
+  const key = recordKey(dateInput.value, classInput.value, id);
+
+  if (!db.records[key]) return;
+
+  if (!confirm("ثبت حضور این دانشجو حذف شود؟")) return;
+
+  delete db.records[key];
+  saveDatabase();
+  renderAttendance();
+}
+
+document.getElementById("attendanceSearch").addEventListener("input", renderAttendance);
+
+function renderAttendance() {
+  const date = dateInput.value;
+  const classNo = classInput.value;
+  const q = normalizeDigits(document.getElementById("attendanceSearch").value).toLowerCase();
+
+  let present = 0;
+  let late = 0;
+
+  const list = db.students.filter(s =>
+    [s.firstName, s.lastName, s.nationalId, s.studentCode]
+      .some(v => normalizeDigits(v).toLowerCase().includes(q))
+  );
+
+  const rows = list.map(s => {
+    const rec = getRecord(date, classNo, s.nationalId);
+
+    if (rec) {
+      present++;
+      if (calcLate(classNo, rec.arrivalTime) > 0) late++;
+    }
+
+    const status = rec
+      ? '<span class="status-present">حاضر</span>'
+      : '<span class="status-absent">غایب</span>';
+
+    const arrival = rec ? escapeHTML(rec.arrivalTime) : "-";
+    const delay = rec ? formatLate(calcLate(classNo, rec.arrivalTime)) : "-";
+
+    const operations = rec
+      ? `<button class="secondary" onclick="editArrival('${s.nationalId}')">اصلاح ورود</button>
+         <button class="danger" onclick="removeAttendance('${s.nationalId}')">حذف حضور</button>`
+      : "-";
+
+    return `<tr>
+      <td>${escapeHTML(fullName(s))}</td>
+      <td>${escapeHTML(s.nationalId)}</td>
+      <td>${status}</td>
+      <td>${arrival}</td>
+      <td>${escapeHTML(delay)}</td>
+      <td>${operations}</td>
+    </tr>`;
+  });
+
+  document.getElementById("totalStudents").textContent = persianNumber(db.students.length);
+  document.getElementById("presentStudents").textContent = persianNumber(present);
+  document.getElementById("absentStudents").textContent = persianNumber(db.students.length - present);
+  document.getElementById("lateStudents").textContent = persianNumber(late);
+
+  document.getElementById("attendanceTable").innerHTML =
+    rows.join("") || `<tr><td colspan="6">دانشجویی ثبت نشده است.</td></tr>`;
+
+  updateSessionInfo();
+}
+
+/* =========================
+   اسکن QR
+========================= */
+
+let scanner = null;
+let scannerRunning = false;
+let scanBusy = false;
+let lastScanText = "";
+let lastScanTime = 0;
+
+async function startScanner() {
+  if (scannerRunning) return;
+
+  if (typeof Html5Qrcode === "undefined") {
+    alert("کتابخانه اسکن QR بارگذاری نشده است. اینترنت را بررسی کن و صفحه را دوباره باز کن.");
+    return;
+  }
+
+  const reader = document.getElementById("reader");
+  reader.innerHTML = "";
+
+  try {
+    scanner = new Html5Qrcode("reader", {
+      verbose: false,
+      formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE]
+    });
+
+    const cameras = await Html5Qrcode.getCameras();
+
+    if (!cameras || !cameras.length) {
+      alert("دوربینی پیدا نشد. مجوز دوربین مرورگر را بررسی کن.");
+      scanner = null;
+      return;
+    }
+
+    // ابتدا دوربین پشت را پیدا می‌کنیم؛ در صورت نبودن، از دوربین اول استفاده می‌کنیم.
+    const backCamera = cameras.find(c =>
+      /back|rear|environment|پشت|عقب/i.test(c.label || "")
+    );
+
+    const cameraId = backCamera ? backCamera.id : cameras[cameras.length - 1].id;
+
+    await scanner.start(
+      cameraId,
+      {
+        fps: 12,
+        qrbox: (viewWidth, viewHeight) => {
+          const size = Math.floor(Math.min(viewWidth, viewHeight, 300) * 0.8);
+          return { width: size, height: size };
+        },
+        aspectRatio: 1,
+        disableFlip: false
+      },
+      decodedText => {
+        if (scanBusy) return;
+
+        const now = Date.now();
+
+        // جلوگیری از چند ثبت متوالی برای یک کد که جلوی دوربین مانده است
+        if (decodedText === lastScanText && now - lastScanTime < 2500) return;
+
+        lastScanText = decodedText;
+        lastScanTime = now;
+        scanBusy = true;
+
+        try {
+          const id = extractNationalId(decodedText);
+
+          if (!id) {
+            alert("محتوای QR باید کد ملی ۱۰ رقمی یا متنی شامل کد ملی باشد.");
+          } else {
+            markAttendance(id, arrivalInput.value || currentTime(), "qr");
+          }
+        } finally {
+          setTimeout(() => { scanBusy = false; }, 1800);
+        }
+      },
+      () => {
+        // خطاهای لحظه‌ای خواندن QR طبیعی هستند؛ پیام نمایش داده نمی‌شود.
+      }
+    );
+
+    scannerRunning = true;
+    document.getElementById("startScanBtn").disabled = true;
+  } catch (error) {
+    scanner = null;
+    scannerRunning = false;
+
+    const message = String(error && (error.message || error));
+
+    if (/permission|NotAllowedError|denied/i.test(message)) {
+      alert("اجازه دسترسی به دوربین داده نشده است. مجوز Camera را برای سایت فعال کن.");
+    } else if (/secure|https/i.test(message)) {
+      alert("دوربین در این آدرس فعال نمی‌شود. سایت را از آدرس HTTPS گیت‌هاب پیجز باز کن.");
+    } else {
+      alert("راه‌اندازی دوربین ناموفق بود. مجوز دوربین، اتصال اینترنت و HTTPS را بررسی کن.\n" + message);
+    }
+  }
+}
+
+function extractNationalId(rawText) {
+  const text = normalizeDigits(rawText);
+
+  // حالت اصلی: خود QR دقیقاً کد ملی است
+  if (/^\d{10}$/.test(text)) return text;
+
+  // حالت جایگزین: QR شامل یک رشته با کد ملی است
+  const matches = text.match(/\d{10}/g);
+
+  if (matches && matches.length === 1) return matches[0];
+
+  return null;
+}
+
+async function stopScanner() {
+  if (!scanner || !scannerRunning) {
+    document.getElementById("startScanBtn").disabled = false;
+    return;
+  }
+
+  try {
+    await scanner.stop();
+    await scanner.clear();
+  } catch (error) {
+    console.warn("Scanner stop issue:", error);
+  }
+
+  scanner = null;
+  scannerRunning = false;
+  document.getElementById("startScanBtn").disabled = false;
+  document.getElementById("reader").innerHTML = "";
+}
+
+document.getElementById("startScanBtn").addEventListener("click", startScanner);
+document.getElementById("stopScanBtn").addEventListener("click", stopScanner);
+
+/* =========================
+   تنظیم ساعت‌ها
+========================= */
+
+function renderTimes() {
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById("start" + i).value =
+      db.times[String(i)] || DEFAULT_TIMES[String(i)];
+  }
+}
+
+document.getElementById("saveTimesBtn").addEventListener("click", () => {
+  for (let i = 1; i <= 5; i++) {
+    const value = document.getElementById("start" + i).value;
+
+    if (!/^\d{2}:\d{2}$/.test(value)) {
+      alert(`ساعت شروع کلاس ${className(i)} را وارد کن.`);
+      return;
+    }
+
+    db.times[String(i)] = value;
+  }
+
+  saveDatabase();
+
+  // سوابق قبلی نیز با ساعت شروع جدید محاسبه می‌شوند.
+  for (const rec of allRecords()) {
+    rec.lateMinutes = calcLate(rec.classNo, rec.arrivalTime);
+  }
+
+  saveDatabase();
+  updateSessionInfo();
+  renderAttendance();
+  renderReports();
+
+  alert("ساعت شروع پنج کلاس ذخیره شد و تأخیرها با ساعت‌های جدید محاسبه شدند.");
+});
+
+/* =========================
+   گزارش‌ها
+========================= */
+
+document.getElementById("refreshReportsBtn").addEventListener("click", renderReports);
+
+function renderReports() {
+  const date = document.getElementById("reportDate").value;
+  const selectedClass = document.getElementById("reportClass").value;
+
+  const records = allRecords().filter(r =>
+    (!date || r.date === date) &&
+    (selectedClass === "all" || r.classNo === selectedClass)
+  ).sort((a, b) =>
+    a.date.localeCompare(b.date) ||
+    Number(a.classNo) - Number(b.classNo) ||
+    a.nationalId.localeCompare(b.nationalId)
+  );
+
+  document.getElementById("reportsTable").innerHTML = records.map(r => {
+    const student = getStudent(r.nationalId);
+    const name = student ? fullName(student) : "دانشجوی حذف‌شده";
+
+    const delay = calcLate(r.classNo, r.arrivalTime);
+
+    return `<tr>
+      <td>${escapeHTML(r.date)}</td>
+      <td>کلاس ${escapeHTML(className(r.classNo))}</td>
+      <td>${escapeHTML(name)}</td>
+      <td>${escapeHTML(r.nationalId)}</td>
+      <td><span class="${delay > 0 ? "status-late" : "status-present"}">${delay > 0 ? "حاضر با تأخیر" : "حاضر"}</span></td>
+      <td>${escapeHTML(getStartTime(r.classNo))}</td>
+      <td>${escapeHTML(r.arrivalTime)}</td>
+      <td>${persianNumber(delay)}</td>
+    </tr>`;
+  }).join("") || `<tr><td colspan="8">برای این فیلتر سابقه‌ای وجود ندارد.</td></tr>`;
+
+  const totals = db.students.map(s => {
+    const ownRecords = allRecords().filter(r => r.nationalId === s.nationalId);
+
+    const delaySum = ownRecords.reduce((sum, r) =>
+      sum + calcLate(r.classNo, r.arrivalTime), 0
+    );
+
+    return {
+      student: s,
+      count: ownRecords.length,
+      delay: delaySum
+    };
+  }).sort((a, b) => b.delay - a.delay);
+
+  document.getElementById("totalsTable").innerHTML = totals.map(t => `
+    <tr>
+      <td>${escapeHTML(fullName(t.student))}</td>
+      <td>${escapeHTML(t.student.nationalId)}</td>
+      <td>${persianNumber(t.count)}</td>
+      <td>${persianNumber(t.delay)}</td>
+    </tr>
+  `).join("") || `<tr><td colspan="4">دانشجویی ثبت نشده است.</td></tr>`;
+}
+
+/* =========================
+   خروجی CSV سازگار با Excel
+========================= */
+
+function csvCell(value) {
+  let text = String(value ?? "");
+
+  // جلوگیری از تفسیر مقدارهای متنی به‌عنوان فرمول در صفحه‌گسترده
+  if (/^[=+\-@]/.test(text)) text = "'" + text;
+
+  return '"' + text.replace(/"/g, '""') + '"';
+}
+
+function downloadCSV(filename, rows) {
+  const csv = "\uFEFF" + rows.map(row => row.map(csvCell).join(",")).join("\r\n");
+
+  const blob = new Blob([csv], {type: "text/csv;charset=utf-8;"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+document.getElementById("exportStudentsBtn").addEventListener("click", () => {
+  const rows = [
+    ["نام", "نام خانوادگی", "کد ملی", "شماره دانشجویی", "رشته", "شماره تلفن"],
+    ...db.students.map(s => [
+      s.firstName, s.lastName, s.nationalId,
+      s.studentCode, s.major, s.phone
+    ])
+  ];
+
+  downloadCSV("students.csv", rows);
+});
+
+document.getElementById("exportAttendanceBtn").addEventListener("click", () => {
+  const date = document.getElementById("reportDate").value;
+  const selectedClass = document.getElementById("reportClass").value;
+
+  const records = allRecords().filter(r =>
+    (!date || r.date === date) &&
+    (selectedClass === "all" || r.classNo === selectedClass)
+  );
+
+  const rows = [[
+    "تاریخ", "شماره کلاس", "نام", "نام خانوادگی", "کد ملی",
+    "ساعت شروع", "ساعت ورود واقعی", "میزان تأخیر (دقیقه)"
+  ]];
+
+  for (const r of records) {
+    const s = getStudent(r.nationalId);
+
+    rows.push([
+      r.date,
+      r.classNo,
+      s ? s.firstName : "",
+      s ? s.lastName : "",
+      r.nationalId,
+      getStartTime(r.classNo),
+      r.arrivalTime,
+      calcLate(r.classNo, r.arrivalTime)
+    ]);
+  }
+
+  downloadCSV("attendance-report.csv", rows);
+});
+
+/* =========================
+   پشتیبان‌گیری و بازیابی
+========================= */
+
+document.getElementById("backupBtn").addEventListener("click", () => {
+  const blob = new Blob(
+    [JSON.stringify(db, null, 2)],
+    {type: "application/json;charset=utf-8"}
+  );
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = "hozur-ghiab-backup-" + todayISO() + ".json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+
+document.getElementById("restoreBtn").addEventListener("click", () => {
+  document.getElementById("restoreFile").click();
+});
+
+document.getElementById("restoreFile").addEventListener("change", async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  try {
+    const text = await file.text();
+    const restored = JSON.parse(text);
+
+    if (
+      !restored ||
+      !Array.isArray(restored.students) ||
+      !restored.records ||
+      typeof restored.records !== "object"
+    ) {
+      throw new Error("ساختار فایل معتبر نیست.");
+    }
+
+    const ids = new Set();
+
+    for (const s of restored.students) {
+      if (!s || !/^\d{10}$/.test(normalizeDigits(s.nationalId))) {
+        throw new Error("کد ملی نامعتبر در فهرست دانشجویان وجود دارد.");
+      }
+
+      const id = normalizeDigits(s.nationalId);
+
+      if (ids.has(id)) {
+        throw new Error("کد ملی تکراری در فایل پشتیبان وجود دارد.");
+      }
+
+      ids.add(id);
+      s.nationalId = id;
+    }
+
+    if (!confirm("بازیابی نسخه پشتیبان، اطلاعات فعلی این دستگاه را جایگزین می‌کند. ادامه می‌دهی؟")) {
+      event.target.value = "";
+      return;
+    }
+
+    db = {
+      students: restored.students,
+      records: restored.records,
+      times: {...DEFAULT_TIMES, ...(restored.times || {})}
+    };
+
+    if (!saveDatabase()) return;
+
+    renderStudents();
+    renderAttendance();
+    renderTimes();
+    renderReports();
+
+    alert("نسخه پشتیبان بازیابی شد.");
+  } catch (error) {
+    alert("بازیابی ناموفق بود: " + error.message);
+  } finally {
+    event.target.value = "";
+  }
+});
+
+document.getElementById("clearDataBtn").addEventListener("click", () => {
+  const first = confirm("هشدار: همه اطلاعات این دستگاه حذف می‌شود. مطمئنی؟");
+  if (!first) return;
+
+  const second = confirm("این عملیات قابل بازگشت نیست مگر اینکه نسخه پشتیبان داشته باشی. حذف نهایی انجام شود؟");
+  if (!second) return;
+
+  db = newDatabase();
+  saveDatabase();
+
+  resetStudentForm();
+  renderStudents();
+  renderAttendance();
+  renderTimes();
+  renderReports();
+
+  alert("اطلاعات این دستگاه حذف شد.");
+});
+
+/* =========================
+   شروع برنامه
+========================= */
+
+renderStudents();
+renderAttendance();
+renderTimes();
+renderReports();
 </script>
+
 </body>
-</html>
+             </html>
